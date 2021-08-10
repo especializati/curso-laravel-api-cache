@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
-use App\Repositories\CourseRepository;
+use App\Repositories\{
+    CourseRepository,
+    ModuleRepository
+};
 
 class ModuleService
 {
@@ -25,7 +28,9 @@ class ModuleService
 
     public function createNewModule(array $data)
     {
-        return $this->moduleRepository->createNewModule($data);
+        $course = $this->courseRepository->getCourseByUuid($data['course']);
+
+        return $this->moduleRepository->createNewModule($course->id, $data);
     }
 
     public function getModuleByCourse(string $course, string $identify)
@@ -37,7 +42,9 @@ class ModuleService
 
     public function updateModule(string $identify, array $data)
     {
-        return $this->moduleRepository->updateModuleByUuid($identify, $data);
+        $course = $this->courseRepository->getCourseByUuid($data['course']);
+
+        return $this->moduleRepository->updateModuleByUuid($course->id, $identify, $data);
     }
 
     public function deleteModule(string $identify)

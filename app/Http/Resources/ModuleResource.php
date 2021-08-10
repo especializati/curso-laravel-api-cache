@@ -14,6 +14,9 @@ class ModuleResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'name' => $this->name,
+            'identify' => $this->uuid
+        ];
     }
 }
