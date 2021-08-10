@@ -22,4 +22,9 @@ class CourseRepository
     {
         return $this->entity->create($data);
     }
+
+    public function getCourseByUuid(string $identify)
+    {
+        return $this->entity->where('uuid', $identify)->firstOrfail();
+    }
 }
