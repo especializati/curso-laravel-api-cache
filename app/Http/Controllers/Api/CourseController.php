@@ -70,11 +70,13 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string  $identify
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($identify)
     {
-        //
+        $this->courseService->deleteCourse($identify);
+
+        return response()->json([], 204);
     }
 }
