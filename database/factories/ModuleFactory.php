@@ -24,7 +24,7 @@ class ModuleFactory extends Factory
     {
         return [
             'course_id' => Course::factory(),
-            'name' => $this->fake->name(),
+            'name' => $this->faker->name(),
         ];
     }
 }
