@@ -39,12 +39,16 @@ jobs:
     steps:
       - name: Execute comands SSH
         uses: appleboy/ssh-action@master
+        env:
+          USER_PASS: "${{ secrets.USER_PASS }}"
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
+          envs: USER_PASS
           script: |
             ls -la
+            echo $USER_PASS | sudo -S docker ps
 
 
