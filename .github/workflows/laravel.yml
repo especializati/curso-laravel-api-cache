@@ -37,6 +37,19 @@ jobs:
     needs: laravel-tests
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Deploy to server
+        uses: easingthemes/ssh-deploy@v2.2.11
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --exclude .git --exclude .docker --exclude .github"
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          TARGET: /home/${{ secrets.SSH_USER }}/ci-cd
+
       - name: Execute comands SSH
         uses: appleboy/ssh-action@master
         env:
