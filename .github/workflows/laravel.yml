@@ -64,3 +64,4 @@ jobs:
             cd ci-cd/
             echo $USER_PASS | sudo -S docker-compose up -d
             echo $USER_PASS | sudo -S docker-compose exec -T curso_api_cache composer install
+            echo $USER_PASS | sudo -S docker-compose exec -T curso_api_cache php artisan migrate --force
