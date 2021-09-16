@@ -1,4 +1,4 @@
-name: Laravel CI
+name: Laravel CI/CD
 
 on:
   push:
@@ -31,3 +31,11 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+
+  laravel-deploy:
+    name: CD
+    needs: laravel-tests
+    runs-on: ubuntu-latest
+    steps:
+
+
